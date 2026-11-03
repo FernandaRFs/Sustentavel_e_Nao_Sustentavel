@@ -7,22 +7,79 @@
 html, body {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Remove qualquer barra de rolagem */
+    overflow: hidden;
     background: #000;
+    font-family: Arial, sans-serif;
 }
 
 body {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #game-canvas {
     display: block;
-    width: 100vw;  
-    height: 100vh; 
-    /* cursor: grab; */
+    width: 100vw;
+    height: 100vh;
+    cursor: grab;
     touch-action: none;
 }
 
 #game-canvas.dragging {
     cursor: grabbing;
+}
+
+/* ================= AVISO DE ROTAÇÃO ================= */
+#aviso-rotacao {
+    display: none; /* Escondido por padrão (PC e celular deitado) */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+}
+
+#aviso-rotacao .icone-girar {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: girar 2s ease-in-out infinite;
+}
+
+#aviso-rotacao h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+#aviso-rotacao p {
+    font-size: 16px;
+    max-width: 320px;
+    line-height: 1.4;
+    opacity: 0.85;
+}
+
+@keyframes girar {
+    0%   { transform: rotate(0deg); }
+    50%  { transform: rotate(90deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Mostra o aviso apenas quando:
+   - A tela está em modo retrato (portrait)
+   - A largura é pequena (celular)
+*/
+@media (orientation: portrait) and (max-width: 900px) {
+    #aviso-rotacao {
+        display: flex;
+    }
+    #game-canvas {
+        display: none;
+    }
 }
