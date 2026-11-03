@@ -10,18 +10,23 @@ html, body {
     overflow: hidden;
     background: #000;
     font-family: Arial, sans-serif;
+    /* Trava o body no tamanho visível real, ignorando a barra de endereço */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #game-canvas {
     display: block;
-    width: 100vw;
-    height: 100vh;
+    /* Ocupa 100% do body, que já está travado no tamanho real */
+    width: 100%;
+    height: 100%;
     cursor: grab;
     touch-action: none;
 }
@@ -32,11 +37,11 @@ body {
 
 /* ================= AVISO DE ROTAÇÃO ================= */
 #aviso-rotacao {
-    display: none; /* Escondido por padrão (PC e celular deitado) */
+    display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     z-index: 9999;
     flex-direction: column;
@@ -71,10 +76,6 @@ body {
     100% { transform: rotate(0deg); }
 }
 
-/* Mostra o aviso apenas quando:
-   - A tela está em modo retrato (portrait)
-   - A largura é pequena (celular)
-*/
 @media (orientation: portrait) and (max-width: 900px) {
     #aviso-rotacao {
         display: flex;
